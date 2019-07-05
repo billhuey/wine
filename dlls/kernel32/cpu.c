@@ -121,6 +121,8 @@ VOID WINAPI GetSystemInfo(
     si->dwActiveProcessorMask       = system_info.ActiveProcessorsAffinityMask;
     si->dwNumberOfProcessors        = system_info.NumberOfProcessors;
 
+printf("%s: %d\n", __func__, system_info.NumberOfProcessors);
+
     switch (sci.Architecture)
     {
     case PROCESSOR_ARCHITECTURE_INTEL:
@@ -307,6 +309,7 @@ DWORD WINAPI GetActiveProcessorCount(WORD group)
     GetSystemInfo( &si );
     cpus = si.dwNumberOfProcessors;
 
+printf("%s: cpus count %d\n", __func__, cpus);
     FIXME("semi-stub, returning %u\n", cpus);
     return cpus;
 }
@@ -322,6 +325,7 @@ DWORD WINAPI GetMaximumProcessorCount(WORD group)
     GetSystemInfo( &si );
     cpus = si.dwNumberOfProcessors;
 
+printf("%s: cpus count %d\n", __func__, cpus);
     FIXME("semi-stub, returning %u\n", cpus);
     return cpus;
 }

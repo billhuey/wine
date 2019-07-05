@@ -114,16 +114,16 @@ void set_scheduler_priority( struct thread *thread )
     if (thread->priority >= THREAD_PRIORITY_TIME_CRITICAL)
     {
         policy = SCHED_FIFO;
-        param.sched_priority = thread_base_priority + 4;
+        param.sched_priority = sched_get_priority_min( SCHED_FIFO );
     }
     else if (thread->priority >= THREAD_PRIORITY_HIGHEST)
     {
-        policy = SCHED_FIFO;
+        policy = SCHED_OTHER;
         param.sched_priority = thread_base_priority + 2;
     }
     else if (thread->priority >= THREAD_PRIORITY_ABOVE_NORMAL)
     {
-        policy = SCHED_FIFO;
+        policy = SCHED_OTHER;
         param.sched_priority = thread_base_priority;
     }
     else if (thread->priority >= THREAD_PRIORITY_NORMAL)

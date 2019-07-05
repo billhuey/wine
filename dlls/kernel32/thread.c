@@ -379,6 +379,9 @@ BOOL WINAPI SetThreadPriority(
         return FALSE;
     }
 
+    if (priority == THREAD_PRIORITY_TIME_CRITICAL)
+         printf("%s: THREAD_PRIORITY_TIME_CRITICAL\n", __func__);
+
     return TRUE;
 }
 

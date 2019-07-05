@@ -535,6 +535,7 @@ NTSTATUS WINAPI RtlpUnWaitCriticalSection( RTL_CRITICAL_SECTION *crit )
     return ret;
 }
 
+int contention_count = 0;
 
 /***********************************************************************
  *           RtlEnterCriticalSection   (NTDLL.@)
@@ -560,6 +561,11 @@ NTSTATUS WINAPI RtlEnterCriticalSection( RTL_CRITICAL_SECTION *crit )
         ULONG count;
 
         if (RtlTryEnterCriticalSection( crit )) return STATUS_SUCCESS;
+        else {
+            contention_count++;
+	    //if ((contention_count % 10) == 0)
+                printf("%s: contention_count %d\n", __func__, contention_count);
+        }
         for (count = crit->SpinCount; count > 0; count--)
         {
             if (crit->LockCount > 0) break;  /* more than one waiter, don't bother spinning */
